@@ -4,7 +4,7 @@
  * после авторизации или его выхода из системы
  * */
 
-class UserWidget {
+ class UserWidget {
   /**
    * Устанавливает полученный элемент
    * в свойство element.
@@ -12,7 +12,10 @@ class UserWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor(element){
-
+    if (!element) {
+      throw new Error('Ошибка!');
+    }
+    this.element = element; 
   }
 
   /**
@@ -23,6 +26,10 @@ class UserWidget {
    * авторизованного пользователя
    * */
   update(){
-
+    const userInfo = User.current();
+    if((userInfo) && (userInfo.name)) {
+      const element = document.querySelector('.user-name');
+      element.textContent = userInfo.name;
+    }
   }
 }
